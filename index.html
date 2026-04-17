@@ -1,26 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dashboard Sapi</title>
-</head>
-<body>
-  <h1>Dashboard Sapi RFID</h1>
+  <title>Dashboard RFID Sapi</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      text-align: center;
+    }
 
-  <p id="id"></p>
-  <p id="status"></p>
-  <p id="lokasi"></p>
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      margin: 50px auto;
+      width: 300px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .status {
+      font-size: 20px;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .aman { background: green; }
+    .bahaya { background: red; }
+    .unknown { background: orange; }
+  </style>
+</head>
+
+<body>
+
+  <h1>🐄 Dashboard RFID Sapi</h1>
+
+  <div class="card">
+    <p id="id"></p>
+    <p id="lokasi"></p>
+    <p id="waktu"></p>
+
+    <div id="statusBox" class="status"></div>
+  </div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
 
-    document.getElementById("id").innerText =
-      "ID Sapi: " + params.get("id");
+    const id = params.get("id") || "Tidak ada";
+    const status = params.get("status") || "UNKNOWN";
+    const lokasi = params.get("lokasi") || "Tidak diketahui";
 
-    document.getElementById("status").innerText =
-      "Status: " + params.get("status");
+    document.getElementById("id").innerText = "ID Sapi: " + id;
+    document.getElementById("lokasi").innerText = "Lokasi: " + lokasi;
 
-    document.getElementById("lokasi").innerText =
-      "Lokasi: " + params.get("lokasi");
+    const now = new Date().toLocaleString();
+    document.getElementById("waktu").innerText = "Waktu Scan: " + now;
+
+    const statusBox = document.getElementById("statusBox");
+
+    if (status === "AMAN") {
+      statusBox.innerText = "AMAN";
+      statusBox.classList.add("aman");
+    } else if (status === "BAHAYA") {
+      statusBox.innerText = "BAHAYA";
+      statusBox.classList.add("bahaya");
+    } else {
+      statusBox.innerText = "UNKNOWN";
+      statusBox.classList.add("unknown");
+    }
   </script>
+
 </body>
 </html>
+
