@@ -2,38 +2,25 @@
 <html>
 <head>
   <title>Dashboard Sapi</title>
-  <style>
-    body {
-      font-family: Arial;
-      background: #f4f6f8;
-      text-align: center;
-    }
-    .card {
-      background: white;
-      padding: 20px;
-      margin: 50px auto;
-      width: 300px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      color: #2c3e50;
-    }
-  </style>
 </head>
-
 <body>
-  <div class="card">
-    <h2>🐄 Dashboard Sapi</h2>
-    <p><b>ID Sapi:</b> <span id="uid"></span></p>
-    <p><b>Status:</b> Sehat</p>
-    <p><b>Lokasi:</b> Kandang A</p>
-    <p><b>Pakan:</b> Normal</p>
-  </div>
+  <h1>Dashboard Sapi RFID</h1>
+
+  <p id="id"></p>
+  <p id="status"></p>
+  <p id="lokasi"></p>
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    document.getElementById("uid").innerText = params.get("id");
+
+    document.getElementById("id").innerText =
+      "ID Sapi: " + params.get("id");
+
+    document.getElementById("status").innerText =
+      "Status: " + params.get("status");
+
+    document.getElementById("lokasi").innerText =
+      "Lokasi: " + params.get("lokasi");
   </script>
 </body>
 </html>
